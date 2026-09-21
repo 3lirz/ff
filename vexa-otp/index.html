@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#07110d" />
+  <meta name="description" content="VEXA OTP — WhatsApp OTP verification infrastructure." />
+  <title>VEXA OTP | WhatsApp Verification</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="nav shell">
+    <a class="brand" href="#top" aria-label="VEXA OTP">
+      <span class="brand-mark">V</span>
+      <span><b>VEXA</b><small>OTP</small></span>
+    </a>
+    <nav>
+      <a href="#test">اختبار</a>
+      <a href="#api">API</a>
+      <a href="#security">الأمان</a>
+    </nav>
+    <div class="status-pill" id="headerStatus"><i></i><span>فحص الاتصال...</span></div>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="hero-copy">
+        <div class="eyebrow"><span>VEXA TECHNOLOGIE</span> / AUTHENTICATION</div>
+        <h1>رموز تحقق حقيقية<br><em>عبر WhatsApp</em></h1>
+        <p>بنية OTP احترافية لتطبيقاتك ومواقعك. توليد آمن، مدة صلاحية، حدود للمحاولات، وواجهة API جاهزة للربط.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#test">جرّب النظام</a>
+          <a class="btn ghost" href="#api">شاهد الـ API</a>
+        </div>
+        <div class="trust-row">
+          <span>6-digit OTP</span><b>•</b><span>5 min expiry</span><b>•</b><span>Rate limited</span><b>•</b><span>WhatsApp Cloud API</span>
+        </div>
+      </div>
+
+      <div class="terminal-card">
+        <div class="terminal-top"><span class="dot"></span><span>VEXA OTP / LIVE STATUS</span><code>v1</code></div>
+        <div class="metric-grid">
+          <div><small>API</small><strong id="apiMetric">CHECKING</strong></div>
+          <div><small>CHANNEL</small><strong>WHATSAPP</strong></div>
+          <div><small>OTP TTL</small><strong>05:00</strong></div>
+          <div><small>MODE</small><strong>SECURE</strong></div>
+        </div>
+        <div class="activity">
+          <div class="line"><span class="time">SYSTEM</span><span>واجهة VEXA OTP جاهزة</span></div>
+          <div class="line"><span class="time">SECURE</span><span>لا يتم تخزين OTP كنص صريح</span></div>
+          <div class="line" id="connectionLine"><span class="time">API</span><span>جاري فحص الـ backend...</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features shell">
+      <article><span class="num">01</span><h3>إرسال فعلي</h3><p>مصمم للاتصال بـ WhatsApp Business Platform وإرجاع معرف الرسالة الحقيقي.</p></article>
+      <article><span class="num">02</span><h3>تحقق آمن</h3><p>OTP من 6 أرقام مع hash، انتهاء تلقائي، وعدد محاولات محدود.</p></article>
+      <article><span class="num">03</span><h3>API لتطبيقاتك</h3><p>اربط Flutter، الويب أو أي backend من خلال endpoints بسيطة وواضحة.</p></article>
+    </section>
+
+    <section class="lab shell" id="test">
+      <div class="section-head">
+        <div><span class="kicker">LIVE LAB</span><h2>اختبار VEXA OTP</h2></div>
+        <div class="connection-badge" id="connectionBadge">فحص Backend...</div>
+      </div>
+
+      <div class="lab-grid">
+        <form class="panel" id="sendForm">
+          <div class="panel-title"><span>1</span><div><b>إرسال الرمز</b><small>Send OTP</small></div></div>
+          <label>رقم الهاتف</label>
+          <div class="phone-row">
+            <select id="countryCode" aria-label="رمز الدولة">
+              <option value="964">🇮🇶 +964</option>
+              <option value="971">🇦🇪 +971</option>
+              <option value="966">🇸🇦 +966</option>
+              <option value="965">🇰🇼 +965</option>
+              <option value="974">🇶🇦 +974</option>
+              <option value="973">🇧🇭 +973</option>
+              <option value="968">🇴🇲 +968</option>
+              <option value="962">🇯🇴 +962</option>
+              <option value="1">🇺🇸 +1</option>
+              <option value="44">🇬🇧 +44</option>
+            </select>
+            <input id="phone" inputmode="numeric" autocomplete="tel-national" placeholder="7XXXXXXXXX" required maxlength="15" />
+          </div>
+          <button class="btn primary wide" id="sendBtn" type="submit">إرسال OTP عبر WhatsApp</button>
+          <p class="form-note">لن تظهر نتيجة نجاح إلا إذا قبل الـ backend طلب الإرسال فعلياً.</p>
+          <div class="result" id="sendResult" hidden></div>
+        </form>
+
+        <form class="panel" id="verifyForm">
+          <div class="panel-title"><span>2</span><div><b>تأكيد الرمز</b><small>Verify OTP</small></div></div>
+          <label>رمز التحقق</label>
+          <input class="otp-input" id="otp" inputmode="numeric" autocomplete="one-time-code" placeholder="000000" maxlength="6" required />
+          <label>Request ID</label>
+          <input id="requestId" class="mono-input" placeholder="يُملأ تلقائياً بعد الإرسال" required />
+          <button class="btn secondary wide" id="verifyBtn" type="submit">تحقق من الرمز</button>
+          <div class="result" id="verifyResult" hidden></div>
+        </form>
+      </div>
+
+      <details class="settings">
+        <summary>إعداد عنوان الـ Backend</summary>
+        <div class="settings-row">
+          <input id="apiBaseInput" placeholder="https://api.example.com" />
+          <button class="btn ghost" id="saveApi" type="button">حفظ وفحص</button>
+        </div>
+        <p>هذا الحقل يحفظ عنوان الـ API فقط في جهازك. مفاتيح WhatsApp السرية يجب أن تبقى داخل السيرفر ولا توضع هنا أبداً.</p>
+      </details>
+    </section>
+
+    <section class="api-section shell" id="api">
+      <div class="section-head"><div><span class="kicker">DEVELOPER API</span><h2>ربط أي تطبيق خلال دقائق</h2></div></div>
+      <div class="endpoint-grid">
+        <article class="endpoint"><div><span class="method">POST</span><code>/v1/otp/send</code></div><pre>{
+  "phone": "9647XXXXXXXXX"
+}</pre><p>يرجع <code>request_id</code> بعد قبول طلب الإرسال.</p></article>
+        <article class="endpoint"><div><span class="method">POST</span><code>/v1/otp/verify</code></div><pre>{
+  "request_id": "otp_...",
+  "code": "123456"
+}</pre><p>يرجع <code>verified: true</code> فقط عند تطابق الرمز ضمن الصلاحية.</p></article>
+      </div>
+    </section>
+
+    <section class="security shell" id="security">
+      <div><span class="kicker">SECURITY FIRST</span><h2>مصمم كخدمة، مو مجرد صفحة.</h2></div>
+      <ul>
+        <li><b>Server-side secrets</b><span>Access Token وPhone Number ID لا يظهران بالمتصفح.</span></li>
+        <li><b>Hashed OTP</b><span>يتم التحقق من hash بدلاً من حفظ الرمز كنص صريح.</span></li>
+        <li><b>Expiry + attempts</b><span>مدة صلاحية قصيرة وعدد محاولات محدود لكل challenge.</span></li>
+        <li><b>Rate limiting</b><span>حدود حسب رقم الهاتف وIP للحد من الإساءة والتكاليف.</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="shell"><div class="brand mini"><span class="brand-mark">V</span><span><b>VEXA</b><small>OTP</small></span></div><p>Authentication infrastructure by VEXA Technologie</p><span>© 2026</span></footer>
+
+  <script src="./config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
