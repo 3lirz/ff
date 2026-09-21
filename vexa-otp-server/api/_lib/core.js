@@ -59,8 +59,8 @@ export function hmac(value) {
   return crypto.createHmac('sha256', config.pepper).update(String(value)).digest('hex');
 }
 
-export function otpHash(id, phone, otp) {
-  return hmac(`otp:${id}:${phone}:${otp}`);
+export function otpHash(id, otp) {
+  return hmac(`otp:${id}:${otp}`);
 }
 
 export function safeEqualHex(a, b) {
