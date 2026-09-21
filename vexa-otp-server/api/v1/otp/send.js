@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     const id = crypto.randomUUID();
     const otp = makeOtp();
     const expiresAt = new Date(Date.now() + 5 * 60 * 1000).toISOString();
-    const hash = otpHash(id, phone, otp);
+    const hash = otpHash(id, otp);
 
     const { error: insertError } = await supabase.from('vexa_otp_challenges').insert({
       id,
