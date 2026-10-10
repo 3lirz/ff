@@ -1,11 +1,12 @@
 # Ali Yaseen Jasim — Developer Portfolio
 
-An independent mobile app developer's personal portfolio, written in English and built as a lightweight static website.
+An independent mobile app developer's bilingual English/Arabic portfolio, built as a lightweight static website with an editorial, classic ivory-and-forest theme.
 
 **Website:** https://3lirz.github.io/ff/portfolio/
 
 ## Included
-- Responsive, dark premium landing page
+- Responsive, classic ivory-and-forest editorial design with subtle brass accents
+- English / Arabic toggle, right-to-left layout, and saved language preference
 - Published app cards with verified store links
 - An honest "In development" area for work not yet publicly available
 - Accessible mobile navigation and working project filters
@@ -20,7 +21,7 @@ An independent mobile app developer's personal portfolio, written in English and
 Other projects are marked as in development and intentionally have no download buttons.
 
 ## Editing
-Edit `index.html` to change text and featured apps, `styles.css` to change the visuals, and `script.js` to adjust filters/mobile navigation. Commit changes to `main`. The repository's existing GitHub Pages publishing should serve this subfolder automatically. Other paths, including `/313/`, remain untouched.
+Edit `index.html` to change text and featured apps, `i18n.js` to adjust Arabic translations, `classic.css` to customize the classic theme, and `script.js` to adjust filters/mobile navigation. Commit changes to `main`. The repository's existing GitHub Pages publishing should serve this subfolder automatically. Other paths, including `/313/`, remain untouched.
 
 ## Contact
 Ali Yaseen Jasim · Phone: +964 783 811 8860
