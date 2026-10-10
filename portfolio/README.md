@@ -23,4 +23,4 @@ Other projects are marked as in development and intentionally have no download b
 Edit `index.html` to change text and featured apps, `styles.css` to change the visuals, and `script.js` to adjust filters/mobile navigation. Commit changes to `main`. The repository's existing GitHub Pages publishing should serve this subfolder automatically. Other paths, including `/313/`, remain untouched.
 
 ## Contact
-Ali Yaseen Jasim · Ali.yassin.jh@gmail.com
+Ali Yaseen Jasim · Phone: +964 783 811 8860
