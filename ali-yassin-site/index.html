@@ -296,6 +296,22 @@ a{color:inherit}
  #home .hero{--hfs:clamp(2rem,10vw,2.6rem)!important}
  #home .avatar{width:min(47vw,180px)!important}
 }
+
+/* Illustrated portfolio cards: independent graphic for each project */
+.work-poster{padding:0;isolation:isolate;background:#17102e;box-shadow:0 27px 60px rgba(3,0,15,.65),inset 0 0 0 1px #ffffff27}
+.work-poster>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .65s cubic-bezier(.2,.8,.2,1)}
+.card:hover .work-poster>img{transform:scale(1.05)}
+.work-poster-shade{position:absolute;inset:50% 0 0;background:linear-gradient(0deg,rgba(4,4,22,.96) 0%,rgba(6,4,24,.82) 30%,transparent 100%);pointer-events:none}
+.work-poster-caption{position:absolute;inset:auto 0 0;padding:22px 16px 19px;display:flex;flex-direction:column;align-items:flex-start;gap:4px;z-index:2;text-shadow:0 3px 12px #000a}
+.work-poster-caption>span{font-weight:700;color:#decaff;font-size:.73rem;background:#6b39c568;border:1px solid #c7a7ff55;padding:3px 9px;border-radius:40px}
+.work-poster-caption h3{font-family:var(--display);font-size:clamp(1.05rem,2.1vw,1.4rem);font-weight:800;line-height:1.4;margin:0}
+.work-poster-caption small{color:#d2c8ee;font-size:.8rem}
+.work-book{isolation:isolate;overflow:hidden;border-radius:18px;background:#140d33;border:1px solid rgba(188,154,255,.32)}
+.work-book>img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .65s}
+.card:hover .work-book>img{transform:scale(1.045)}
+.work-book-caption{position:absolute;z-index:2;bottom:0;left:0;right:0;padding:26px 12px 14px;background:linear-gradient(0deg,rgba(6,5,25,.98),rgba(6,5,25,0));font-family:var(--display);font-size:clamp(.95rem,1.9vw,1.35rem);font-weight:800;color:white;text-shadow:0 2px 10px #000b;text-align:center}
+@media(max-width:760px){.work-poster-caption{padding:16px 12px}.work-poster-caption h3{font-size:1.06rem}.work-poster-caption small{font-size:.72rem}}
+
 </style>
 </head>
 <body>
@@ -374,18 +390,18 @@ const SITE = {
   ],
   works: [
     { title: 'تطبيقات الهواتف والمنصات', mode: 'rail', items: [
-      { img: '', c: ['#bc8738','#342105'], t: '313 — التطبيق الديني' },
-      { img: '', c: ['#fe6daa','#762051'], t: 'Puabi — متجر التجميل' },
-      { img: '', c: ['#1487e8','#18356d'], t: 'القبس — ثقافة وتنمية' },
-      { img: '', c: ['#8736ea','#100939'], t: 'Nice Chat — نبض' },
-      { img: '', c: ['#22b9aa','#0a4354'], t: 'Daleeni — دلّيني' },
-      { img: '', c: ['#2b73e4','#12346f'], t: 'ORVEO — وكلاء الذكاء الاصطناعي' }
+      { img: 'assets/works/313.svg', c: ['#bc8738','#342105'], t: '313 — التطبيق الديني' },
+      { img: 'assets/works/puabi.svg', c: ['#fe6daa','#762051'], t: 'Puabi — متجر التجميل' },
+      { img: 'assets/works/alqabas.svg', c: ['#1487e8','#18356d'], t: 'القبس — ثقافة وتنمية' },
+      { img: 'assets/works/nicechat.svg', c: ['#8736ea','#100939'], t: 'Nice Chat — نبض' },
+      { img: 'assets/works/daleeni.svg', c: ['#22b9aa','#0a4354'], t: 'Daleeni — دلّيني' },
+      { img: 'assets/works/orveo.svg', c: ['#2b73e4','#12346f'], t: 'ORVEO — وكلاء الذكاء الاصطناعي' }
     ]},
     { title: 'أنظمة الإدارة والبرمجيات', mode: 'float', items: [
-      { img: '', c: ['#225bd4','#0b204e'], t: 'جدولي — الجداول المدرسية' },
-      { img: '', c: ['#7c3aed','#1c1151'], t: 'إدارة البيانات والتقارير' },
-      { img: '', c: ['#0c94aa','#143963'], t: 'لوحات التحكم والمواقع' },
-      { img: '', c: ['#b65ed9','#3b1b68'], t: 'حلول رقمية مخصصة' }
+      { img: 'assets/works/jadwali.svg', c: ['#225bd4','#0b204e'], t: 'جدولي — الجداول المدرسية' },
+      { img: 'assets/works/records.svg', c: ['#7c3aed','#1c1151'], t: 'إدارة البيانات والتقارير' },
+      { img: 'assets/works/dashboard.svg', c: ['#0c94aa','#143963'], t: 'لوحات التحكم والمواقع' },
+      { img: 'assets/works/solutions.svg', c: ['#b65ed9','#3b1b68'], t: 'حلول رقمية مخصصة' }
     ]}
   ],
   clients: ['Flutter','Dart','Node.js','iOS','Android','Web','واجهة المستخدم','GitHub','Firebase','HTML / CSS','JavaScript','Windows'],
@@ -533,10 +549,8 @@ function countUp() {
 const wStage = $('#wStage'), wDots = $('#wDots'), wSub = $('#wSub'), wWrap = $('#worksWrap');
 let cat = 0, idx = 0, auto = null, hover = false;
 
-const posterHTML = (it, i) => `<div class="poster" style="--c1:${it.c[0]};--c2:${it.c[1]}">${it.img ? `<img src="${esc(it.img)}" alt="">` :
-  `<span class="tag">مكان تصميمك</span><span class="ring"></span><div><h3>${esc(it.t || 'عنوان التصميم')}</h3><small>استبدل هذا الكرت بصورة عملك</small></div>`}</div>`;
-const bookHTML = (it, i) => it.img ? `<div class="book"><img src="${esc(it.img)}" alt=""></div>` :
-  `<div class="book" style="--c1:${it.c[0]};--c2:${it.c[1]}"><div class="pg l"><div class="blk"></div><i></i><i></i><i></i></div><div class="pg r"><i></i><i></i><i></i><i></i><i></i><div class="blk"></div></div></div>`;
+const posterHTML = it => `<div class="poster work-poster" style="--c1:${it.c[0]};--c2:${it.c[1]}"><img src="${esc(it.img)}" alt="معاينة مصورة لمشروع ${esc(it.t)}" loading="lazy" decoding="async"><div class="work-poster-shade"></div><div class="work-poster-caption"><span>مشروع رقمي</span><h3>${esc(it.t)}</h3><small>صورة توضيحية للتطبيق</small></div></div>`;
+const bookHTML = it => `<div class="book work-book"><img src="${esc(it.img)}" alt="معاينة مصورة لمشروع ${esc(it.t)}" loading="lazy" decoding="async"><div class="work-book-caption">${esc(it.t)}</div></div>`;
 
 function renderCat() {
   const c = SITE.works[cat];
