@@ -262,6 +262,40 @@ a{color:inherit}
 .poster{border:1px solid rgba(255,255,255,.2);transition:box-shadow .4s}
 .card:hover .poster{box-shadow:0 20px 65px rgba(153,91,255,.65),inset 0 0 0 1px rgba(255,255,255,.25)}
 @media(max-width:760px){.avatar img{max-height:260px}.page.exit-3d{transform:perspective(900px) rotateY(40deg) translateZ(-250px) scale(.77)!important}}
+
+/* Profile photo and ergonomic mobile layout */
+#heroAvatar{overflow:visible}
+.avatar{isolation:isolate;max-width:290px}
+.avatar img{object-fit:cover!important;object-position:center 17%;border-radius:44% 44% 38% 38%!important;box-shadow:0 20px 65px rgba(139,92,246,.35);-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 82%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 82%,transparent 100%)}
+.mini img{object-fit:cover;object-position:center 15%}
+.photo img{object-fit:cover!important;object-position:center 22%}
+.home-note,.more-apps-note{color:#d8c9ff;text-align:center;font-size:clamp(.8rem,1.5vw,.98rem);line-height:1.85;margin:18px auto 4px;max-width:670px;padding:9px 16px;background:rgba(129,78,212,.1);border:1px solid rgba(185,162,255,.2);border-radius:18px}
+.home-note{font-weight:600}
+#stats .inner{padding:0 12px}
+@media(max-width:760px){
+ #home .hero{--hfs:clamp(2.3rem,10.7vw,3.45rem)!important;padding-inline:6px;width:min(100%,520px)}
+ #home .hero h1{font-size:var(--hfs)!important;line-height:1.16;max-width:100%;overflow-wrap:normal}
+ #home .hero-row{margin-top:14px;grid-template-columns:1fr auto;grid-template-areas:"av av" "who cta";align-items:center;gap:10px}
+ #home .avatar{width:min(53vw,205px)!important;aspect-ratio:1/1.05;max-height:215px}
+ #home .who{padding:0;min-width:0}
+ #home .who b{font-size:1.06rem;line-height:1.45}
+ #home .who span{font-size:.83rem;line-height:1.6}
+ #home .cta{padding:0 15px;height:43px;font-size:.86rem;white-space:nowrap}
+ #home .home-note{font-size:.79rem;margin-top:15px;padding:7px 11px}
+ #about .about{gap:16px}
+ #about .photo{width:min(185px,50vw)}
+ #about .about-txt{padding:0 12px}
+ #about .about-txt h2{font-size:clamp(2rem,9vw,2.8rem)}
+ #about .about-txt p{font-size:.98rem;line-height:1.87;margin-bottom:12px;word-break:normal;overflow-wrap:break-word}
+ #stats .stats{gap:9px}
+ #stats .stat{width:clamp(99px,29vw,160px);padding:12px 5px;min-height:200px}
+ #stats .lbl{font-size:.78rem;line-height:1.6}
+ #stats .more-apps-note{font-size:.88rem;margin-top:25px}
+}
+@media(max-width:380px){
+ #home .hero{--hfs:clamp(2rem,10vw,2.6rem)!important}
+ #home .avatar{width:min(47vw,180px)!important}
+}
 </style>
 </head>
 <body>
@@ -290,6 +324,7 @@ a{color:inherit}
         <div class="avatar" id="heroAvatar"></div>
         <button class="cta" type="button" data-page="works">أعمالي <svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
       </div>
+      <p class="home-note">أكثر من 12 تطبيق منشور • بعضها خاص وغير معلن بناءً على طلب أصحابه</p>
     </div></section>
 
     <section class="page" id="works" aria-label="أعمالي"><div class="inner">
@@ -312,7 +347,7 @@ a{color:inherit}
       <div class="rows" id="rows"></div>
     </div></section>
 
-    <section class="page" id="stats" aria-label="إنجازاتي"><div class="inner"><div class="stats" id="statsRow"></div></div></section>
+    <section class="page" id="stats" aria-label="إنجازاتي"><div class="inner"><div class="stats" id="statsRow"></div><p class="more-apps-note">وأكثر من 12 تطبيقاً منشوراً، ولكن لا يمكن الإعلان عنها لأنها تخص أصحابها كما طلبوا.</p></div></section>
   </main>
 
   <div class="menu" id="menu" aria-hidden="true">
@@ -329,12 +364,13 @@ const SITE = {
   name: 'علي ياسين',
   role: 'مطور تطبيقات ومواقع وأنظمة رقمية',
   headline: ['من الفكرة', 'إلى التطبيق'],
-  avatar: 'https://avatars.githubusercontent.com/u/295392744?v=4',
-  photo: 'https://avatars.githubusercontent.com/u/295392744?v=4',
+  avatar: 'assets/ali-yaseen.jpg',
+  photo: 'assets/ali-yaseen.jpg',
   about: [
     'أنا علي ياسين، أهتم بتصميم وتطوير التطبيقات والمواقع والأنظمة الرقمية، وتحويل الأفكار إلى أدوات وتجارب عملية بواجهات عربية حديثة.',
     'من مشاريعي تطبيق 313، ومتجر Puabi، ومنصة القبس، وNice Chat — نبض، وتطبيق دلّيني للملاحة، وبرنامج جدولي للجداول المدرسية. أواصل تطوير هذه المشاريع وإضافة التحسينات والخصائص الجديدة.',
-    'أهتم بتجربة المستخدم والتفاصيل البصرية والأداء، وبالعمل على تطبيقات الهواتف والحاسوب والويب.'
+    'أهتم بتجربة المستخدم والتفاصيل البصرية والأداء، وبالعمل على تطبيقات الهواتف والحاسوب والويب.',
+    'وأكثر من 12 تطبيقاً منشوراً، ولكن لا يمكن الإعلان عنها لأنها تخص أصحابها كما طلبوا.'
   ],
   works: [
     { title: 'تطبيقات الهواتف والمنصات', mode: 'rail', items: [
@@ -354,7 +390,7 @@ const SITE = {
   ],
   clients: ['Flutter','Dart','Node.js','iOS','Android','Web','واجهة المستخدم','GitHub','Firebase','HTML / CSS','JavaScript','Windows'],
   stats: [
-    { n: 6, label: 'مشاريع بارزة', icon: 'briefcase' },
+    { n: 12, label: 'تطبيقاً منشوراً وأكثر', icon: 'briefcase' },
     { n: 3, label: 'منصات: هاتف / ويب / حاسوب', icon: 'award' },
     { n: 5, label: 'أقسام الموقع', icon: 'users' }
   ],
